@@ -4,6 +4,7 @@ import torch.nn as nn
 from Bio import SeqIO
 from torch.utils.data import DataLoader
 from Processing import Processing
+"If you want to process protein sequences, please use from proteinProcessing import Processing instead of from Processing import Processing"
 import copy
 import torch
 import gc
@@ -120,8 +121,8 @@ for i in range(50):
         optimizer.step()
         total_train_step = total_train_step + 1
     end_time = time.time()
-    print("第{}轮训练中，训练时间为：{}".format(i + 1, end_time - start_time))
-    print("第 {} 轮训练中，正确率： {}, 损失值： {}".format(i + 1, total_training_accuracy / 'Number of samples in the training set', total_training_loss))
+    print("{}epoch，Training time：{}".format(i + 1, end_time - start_time))
+    print("{} epoch，Accuracy： {}, Loss： {}".format(i + 1, total_training_accuracy / 'Number of samples in the training set', total_training_loss))
     gc.collect()
     torch.cuda.empty_cache()
 
@@ -152,7 +153,7 @@ for i in range(50):
             total_test_step = total_test_step + 1
             
         end_time = time.time()
-        print("第{}轮测试中，测试时间为：{}".format(i + 1, end_time - start_time))
+        print("{}epoch，Test time：{}".format(i + 1, end_time - start_time))
         predict_labels = predict_labels.cpu().detach().numpy()
         true_labels = true_labels.cpu().detach().numpy()
         a = total_test_accuracy
